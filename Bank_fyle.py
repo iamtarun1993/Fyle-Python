@@ -4,24 +4,19 @@ import pandas as pd
 pd.set_option('display.expand_frame_repr', False)
 
 
-def main():
-	#data_csv_frame = pd.read_csv("bank_branches.csv");
-	url="https://raw.githubusercontent.com/snarayanank2/indian_banks/master/bank_branches.csv"
-	data_csv_frame = pd.read_csv(url);
-	#print(data_csv_frame);
-	input_value(data_csv_frame);
-
 def input_value(data_csv_frame):
-	val_check=input('\nEnter 1 to find bank details by IFSC OR 2 to find all bank details by bank name and city AND 0 to exit: ');
+	val_check=int(input('\nEnter 1 to find bank details by IFSC OR 2 to find all bank details by bank name and city AND 0 to exit: '));
 	#print(val_check);
-	if (val_check==1):
-   		bank_dtls_ifsc(data_csv_frame);
-   	elif(val_check==2):
+
+	if val_check==1:
+		bank_dtls_ifsc(data_csv_frame);
+   	elif val_check==2:
    		all_bank_dtls(data_csv_frame)
-   	elif(val_check==0):
-   		print("OK.. Bye")
-	else:
-   		print("Try Again");
+   	elif val_check==0:
+   		print("OK.. Bye");
+   	else:
+   		print("Wrong input! Try Again");
+   		input_value(data_csv_frame)
 
   
 def bank_dtls_ifsc(data_csv_frame):
@@ -70,6 +65,13 @@ def all_bank_dtls(data_csv_frame):
 			bank_details = bank_details+[{'IFSC CODE': bank_full_data.iloc[i]['ifsc'] ,'BANK NAME': bank_full_data.iloc[i]['bank_name'],'BRANCH': bank_full_data.iloc[i]['branch'],'CITY': bank_full_data.iloc[i]['city'], 'DISTRICT': bank_full_data.iloc[i]['district'], 'STATE': bank_full_data.iloc[i]['state'], 'ADDRESS' : bank_full_data.iloc[i]['address']}];
 		bank_details =  pd.DataFrame(bank_details);
 		print(bank_details);
+	input_value(data_csv_frame);
+
+def main():
+	#data_csv_frame = pd.read_csv("bank_branches.csv");
+	url="https://raw.githubusercontent.com/snarayanank2/indian_banks/master/bank_branches.csv"
+	data_csv_frame = pd.read_csv(url);
+	#print(data_csv_frame);
 	input_value(data_csv_frame);
 
 
